@@ -1,0 +1,27 @@
+{
+  "name": "trello-like-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch materials/db.json  --static ./public",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yzc1112/trello-like-application.git"
+  },
+  "author": "yangzichao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yzc1112/trello-like-application/issues"
+  },
+  "homepage": "https://github.com/yzc1112/trello-like-application#readme",
+  "dependencies": {
+    "json-server": "^0.14.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "request": "^2.88.0",
+    "should": "^13.2.3"
+  }
+}

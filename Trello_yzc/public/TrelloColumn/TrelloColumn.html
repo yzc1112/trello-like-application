@@ -1,0 +1,80 @@
+<template id="trello-column">
+    <style>
+        .trello-column__title {
+            color: #c123de;
+            display: inline-grid;
+            font-size: 20px;
+            margin: 15px;
+            top: 10px;
+            width: 25%;
+            font-weight:bold;
+             flex: 0 0 auto;
+      padding: 10px 8px 8px;
+      position: relative;
+      min-height: 20px;
+        }
+        .trello-column__add-a-new-card {
+            box-shadow: 0px 10px 14px -7px #3e7327;
+            background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+            background-color:#77b55a;
+            border-radius:4px;
+            border:1px solid #4b8f29;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Arial;
+            font-size:13px;
+            font-weight:bold;
+            padding:3px 12px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #5b8a3c;
+        }
+        .trello-column__add-a-new-card:hover {
+            background:linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
+            background-color:#72b352;
+        }
+        .trello-column__add-a-new-card:active {
+            position:relative;
+            top:1px;
+        }
+        .trello-column__delete-column  {
+            	box-shadow:inset 0px 39px 0px -24px #e67a73;
+               background-color:#e4685d;
+	
+                border-radius:4px;
+                border:1px solid #ffffff;
+                display:inline-block;
+                cursor:pointer;
+                color:#ffffff;
+                font-family:Arial;
+                font-size:13px;
+                padding:3px 12px;
+                text-decoration:none;
+                text-shadow:0px 1px 0px #b23e35;
+        }
+        .trello-column__delete-column :hover {
+            background:linear-gradient(to bottom, #e4685d 5%, #fc8d83 100%);
+            background-color:#eb675e;   
+        }
+        .trello-column__delete-column :active {
+            position:relative;
+            top:1px;
+        }
+
+
+        .trello-column__navbar-search {
+            background: grey;
+            height: 30px;
+        }
+
+        
+    </style>
+    <span class="trello-column-container">
+        <div class="trello-column__title" contenteditable="true"></div>
+        <button  class="trello-column__add-a-new-card">Add Card</button>
+        <button  class="trello-column__delete-column">Delete Column</button>
+    </span>
+</template>
+
+<link rel="import" href="../TrelloCard/TrelloCard.html">
+<script src="./TrelloColumn.js"></script>

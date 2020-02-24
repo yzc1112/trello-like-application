@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Trello Like Application - Yang Zichao</title>
+    <link rel="import" href="./TrelloColumn/TrelloColumn.html">
+    <link rel="stylesheet" type="text/css" href="./TrelloAppController.css">
+</head>
+
+<body>
+    <div class="trello-app__navbar-search">
+        <input type="text" placeholder="Enter to search.." name="search" class="trello-app__search" onkeydown="search(this)">
+    </div>
+    <h1>Trello Like Application - Yang Zichao</h1>
+    <div class="row__columns" id="trello-app__content">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.14/webcomponents-hi.js"></script>
+    <script src="./TrelloAppController.js"></script>
+
+</body>
+<style>
+   
+  
+
+    h2 {
+      font-size: 14px;
+      line-height: 24px;
+      margin: 0 0 8px;
+    }
+
+   
+
+   
+
+    button.primary {
+      background-color: #5aac44;
+      box-shadow: 0 1px 0 0 #3f6f21;
+      border: none;
+      color: #fff;
+    }
+
+    button,
+    button[type=submit] {
+      cursor: pointer;
+      font-weight: 700;
+      line-height: 20px;
+      margin: 8px 4px 0 0;
+      padding: 6px 12px;
+      text-align: center;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      border-radius: 3px;
+      transition-property: background-color, border-color, box-shadow;
+      transition-duration: 85ms;
+      transition-timing-function: ease;
+      font-size: 14px;
+    }
+
+    #app-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #columns-section,
+    #columns-container {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .column-wrapper {
+      width: 272px;
+      height: 100%;
+      box-sizing: border-box;
+      display: inline-block;
+      vertical-align: top;
+      white-space: nowrap;
+      border: 5px solid transparent;
+    }
+
+    .column-wrapper.hovered {
+      border: dotted 5px black;
+    }
+
+    .column {
+      background-color: #dfe1e6;
+      border-radius: 3px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      max-height: 100%;
+      position: relative;
+      white-space: normal;
+    }
+
+    .column-header {
+      flex: 0 0 auto;
+      padding: 10px 8px 8px;
+      position: relative;
+      min-height: 20px;
+    }
+
+    .column-edit-button {
+      position: absolute;
+      top: 4px;
+      right: 35px;
+      height: 24px;
+      width: 24px;
+      background-image: url(/icons/edit.png);
+    }
+
+    .column-delete-button {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      height: 24px;
+      width: 24px;
+      background-image: url(/icons/garbage.png);
+    }
+
+    .column-header[hidden] {
+      display: none;
+    }
+
+    /* added margin to avoid the input field covering buttons*/
+    .column-header-input {
+      margin-top: 24px;
+    }
+
+    .cards {
+      flex: 1 1 auto;
+      margin-bottom: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin: 0 4px;
+      padding: 0 4px;
+      z-index: 1;
+      min-height: 0;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 3px;
+      box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
+      cursor: pointer;
+      display: block;
+      margin-bottom: 8px;
+      max-width: 300px;
+      min-height: 32px;
+      position: relative;
+      text-decoration: none;
+      z-index: 0;
+
+      overflow: hidden;
+      padding: 32px 8px 30px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .card-title {
+      clear: both;
+      display: block;
+      margin: 0;
+      overflow: hidden;
+      text-decoration: none;
+      word-wrap: break-word;
+      color: #172b4d;
+    }
+
+    #new-card-input {
+      box-shadow: none;
+      border: none;
+    }
+
+    .card-composer {
+      padding-bottom: 8px;
+    }
+
+    .mod-add {
+      background-color: #dfe1e6;
+      border-radius: 3px;
+      height: auto;
+      min-height: 32px;
+      padding: 4px;
+      transition: background 85ms ease-in, opacity 40ms ease-in, border-color 85ms ease-in;
+      margin-top: 4px;
+    }
+
+    .card-id {
+      color: #dddddd;
+      font-size: 0.8em;
+      display: none;
+    }
+
+    .card-edit-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      height: 24px;
+      width: 24px;
+      background-image: url(/icons/edit.png);
+    }
+
+    .card-delete-btn {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      height: 24px;
+      width: 24px;
+      background-image: url(/icons/garbage.png)
+    }
+
+    .card-title[hidden],
+    .card-description[hidden] {
+      display: none;
+    }
+
+    .card-title-input,
+    .card-creator-title-input {
+      width: 100%;
+    }
+
+    .card-description-input,
+    .card-creator-description-input {
+      width: 100%;
+      border-top: none;
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+      margin-top: -1px;
+    }
+
+    .search {
+      padding-left: 4px;
+      padding-right: 4px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      height: 24px;
+      width: 24px;
+      background-color: #FFF;
+      background-image: url(/icons/search.png)
+    }
+
+    #search {
+      padding-left: 42px;
+    }
+  </style>
+</html>
